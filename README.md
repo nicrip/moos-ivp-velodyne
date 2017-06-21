@@ -5,7 +5,7 @@ Implementation of VelodyneHDL (https://github.com/nicrip/VelodyneHDL) drivers fo
 
 #### Dependencies
 ###### VelodyneHDL Library:
-> (https://github.com/nicrip/VelodyneHDL)
+> https://github.com/nicrip/VelodyneHDL
 
 ###### MOOS-IvP V10:
 > You must have MOOSV10 for these drivers to work correctly, with MOOS built with asynchronous communications support - Velodyne packets are streamed so quickly that MOOS pre-V10 cannot keep up
