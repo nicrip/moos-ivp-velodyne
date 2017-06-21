@@ -1,0 +1,15 @@
+//------------------------------------------------
+// iVelodyneHDLFileSender config block
+
+ProcessConfig = iVelodyneHDLFileSender
+{
+   // to properly send Velodyne packets, must iterate as quickly as possible
+   AppTick   = 0
+   CommsTick = 0
+
+   PCAP_FILE = ../dock_Test2.pcap	// pcap file with packets
+   TRIGGER = true                	// trigger playback
+   TRIGGER_DB = MOOSDB_rex4USV          // MOOSDB that publishes the trigger time
+   TRIGGER_TIME = 1496166938            // MOOSTime at which to trigger packet streaming
+}
+
