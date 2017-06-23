@@ -80,6 +80,7 @@ INCLUDE_DIRECTORIES(${IVP_INCLUDE_DIRS})
 FILE(GLOB IVP_LIBRARY_DIRS ${MOOSIVP_SOURCE_TREE_BASE}/lib )
 LINK_DIRECTORIES(${IVP_LIBRARY_DIRS})
 
+INCLUDE_DIRECTORIES("../VelodyneHDL")
 
 #===========================================================================
 # Specify Compiler Flags

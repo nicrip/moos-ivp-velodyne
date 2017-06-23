@@ -18,11 +18,13 @@ ADD_EXECUTABLE(iVelodyneHDL ${SRC})
 TARGET_LINK_LIBRARIES(iVelodyneHDL
    ${MOOS_LIBRARIES}
    ${MOOS_DEPEND_LIBRARIES}
-   PacketDriver
-   PacketDecoder
+   /home/athena/VelodyneHDL/build/libPacketDriver.so
+   /home/athena/VelodyneHDL/build/libPacketDecoder.so
    pcap
    boost_system
    mbutil
    m
-   pthread)
+   pthread
+   rt
+)
 
