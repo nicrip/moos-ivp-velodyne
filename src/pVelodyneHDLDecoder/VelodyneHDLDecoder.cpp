@@ -47,6 +47,8 @@ VelodyneHDLDecoder::VelodyneHDLDecoder()
 
   m_packet = new std::string();
   m_packet_length = new unsigned int();
+  m_latest_bundle = new std::string();
+  m_latest_bundle_length = new unsigned int();
   m_variables.str("");
   m_variables.clear();
 }
@@ -89,6 +91,29 @@ bool VelodyneHDLDecoder::OnNewMail(MOOSMSG_LIST &NewMail)
         m_frame.clear();
       }
       delete m_packet;
+    }
+
+    if(p->IsName("VELODYNE_PACKET_BUNDLE")) {
+      m_latest_bundle = new string((char*)p->GetBinaryData(), p->GetBinaryDataSize());
+      *m_latest_bundle_length = p->GetBinaryDataSize();
+
+      m_bundle_decoder.DecodeBundle(m_latest_bundle, m_latest_bundle_length);
+      if (m_bundle_decoder.GetLatestFrame(&m_latest_frame_b)) {
+        m_frame = m_latest_frame_b.x + m_latest_frame_b.y + m_latest_frame_b.z;
+        if (m_intensity) m_frame += m_latest_frame_b.intensity;
+        if (m_laser_id) m_frame += m_latest_frame_b.laser_id;
+        if (m_azimuth) m_frame += m_latest_frame_b.azimuth;
+        if (m_distance) m_frame += m_latest_frame_b.distance;
+        if (m_ms_from_top_of_hour) m_frame += m_latest_frame_b.ms_from_top_of_hour;
+        m_variables << "intensity=" << m_intensity << ",laser_id=" << m_laser_id << ",azimuth=" << m_azimuth << ",distance=" << m_distance << ",ms_from_top_of_hour=" << m_ms_from_top_of_hour;
+        Notify("VELODYNE_FRAME_VARIABLES", m_variables.str());
+        Notify("VELODYNE_FRAME", (unsigned char*) m_frame.data(), (unsigned int) (m_frame.size()*sizeof(double)));
+        Notify("VELODYNE_NUM_POINTS", m_latest_frame_b.x.size());
+        m_variables.str("");
+        m_variables.clear();
+        m_frame.clear();
+      }
+      delete m_latest_bundle;
     }
 
 #if 0 // Keep these around just for template
@@ -205,5 +230,6 @@ void VelodyneHDLDecoder::RegisterVariables()
 {
   // Register("FOOBAR", 0);
   Register("VELODYNE_PACKET", 0);
+  Register("VELODYNE_PACKET_BUNDLE", 0);
 }
 

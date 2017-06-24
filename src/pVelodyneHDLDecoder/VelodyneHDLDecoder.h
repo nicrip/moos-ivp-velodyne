@@ -10,6 +10,7 @@
 
 #include "PacketDriver.h"
 #include "PacketDecoder.h"
+#include "PacketBundleDecoder.h"
 #include "MOOS/libMOOS/App/MOOSApp.h"
 
 class VelodyneHDLDecoder : public CMOOSApp
@@ -28,23 +29,27 @@ class VelodyneHDLDecoder : public CMOOSApp
    void RegisterVariables();
 
  private: // Configuration variables
-   std::string              m_corrections_file;
-   bool                     m_intensity;
-   bool                     m_laser_id;
-   bool                     m_azimuth;
-   bool                     m_distance;
-   bool                     m_ms_from_top_of_hour;
+   std::string                    m_corrections_file;
+   bool                           m_intensity;
+   bool                           m_laser_id;
+   bool                           m_azimuth;
+   bool                           m_distance;
+   bool                           m_ms_from_top_of_hour;
 
  private: // State variables
-   std::vector<double>      m_frame;
-   PacketDecoder            m_decoder;
-   std::string*             m_packet;
-   unsigned int*            m_packet_length;
-   PacketDecoder::HDLFrame  m_latest_frame;
-   unsigned int             m_iterations;
-   double                   m_timewarp;
-   bool                     m_corrections_given;
-   std::stringstream        m_variables;
+   std::vector<double>            m_frame;
+   PacketDecoder                  m_decoder;
+   std::string*                   m_packet;
+   unsigned int*                  m_packet_length;
+   PacketBundleDecoder            m_bundle_decoder;
+   std::string*                   m_latest_bundle;
+   unsigned int*                  m_latest_bundle_length;
+   PacketDecoder::HDLFrame        m_latest_frame;
+   PacketBundleDecoder::HDLFrame  m_latest_frame_b;
+   unsigned int                   m_iterations;
+   double                         m_timewarp;
+   bool                           m_corrections_given;
+   std::stringstream              m_variables;
 };
 
 #endif

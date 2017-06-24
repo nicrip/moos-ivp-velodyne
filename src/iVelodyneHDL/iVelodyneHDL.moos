@@ -6,7 +6,8 @@ ProcessConfig = iVelodyneHDL
    // do things as quickly as possible, or risk losing Velodyne packets - comms MUST be asynchronous
    AppTick   = 0
 
-   DECODE = false                       // true: publish and decode the packet, false: only publish the packet
+   BUNDLE = true                        // true: bundle packets to reduce publish rate, false: publish packets directly
+   DECODE = false                       // true: publish and decode the packet (or packet bundle), false: only publish the packet (or packet bundle)
    CORRECTIONS_FILE = ../32db.xml	// xml file to correct lasers
    INTENSITY = false                    // append intensity values to the point array
    LASER_ID = false                     // append laser ID values to the point array

@@ -17,7 +17,8 @@ ADD_EXECUTABLE(pVelodyneHDLDecoder ${SRC})
 
 TARGET_LINK_LIBRARIES(pVelodyneHDLDecoder
    ${MOOS_LIBRARIES}
-   /home/athena/VelodyneHDL/build/libPacketDecoder.so
+   PacketDecoder
+   PacketBundleDecoder
    boost_system
    mbutil
    m
