@@ -1,0 +1,29 @@
+ServerHost = $(VIP)
+ServerPort = $(VPORT)
+
+Community = $(VNAME)
+
+Processconfig = ANTLER
+{
+  MSBetweenLaunches = 100
+  Run = iVelodyneHDL    @ NewConsole = false
+}
+
+// iVelodyneHDL config block
+
+ProcessConfig = iVelodyneHDL
+{
+   // do things as quickly as possible, or risk losing Velodyne packets - comms MUST be asynchronous
+   AppTick   = 0
+
+   DECODE = false                       // true: publish and decode the packet, false: only publish the packet
+//   CORRECTIONS_FILE = ../32db.xml	// xml file to correct lasers
+   INTENSITY = false                    // append intensity values to the point array
+   LASER_ID = false                     // append laser ID values to the point array
+   AZIMUTH = false                      // append azimuth values to the point array
+   DISTANCE = false                     // append distance values to the point array
+   MS_FROM_TOP_OF_HOUR = false          // append ms from the top of the hour values to the point array
+   WRITE_PCAP = false                   // write the packets to a pcap file
+   WRITE_PATH = ./                      // write path for pcap file (must end with slash)
+}
+

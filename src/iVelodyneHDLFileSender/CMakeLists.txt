@@ -22,5 +22,7 @@ TARGET_LINK_LIBRARIES(iVelodyneHDLFileSender
    pcap
    mbutil
    m
-   pthread)
+   pthread
+   rt
+)
 

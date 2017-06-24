@@ -25,5 +25,7 @@ TARGET_LINK_LIBRARIES(iVelodyneHDL
    boost_system
    mbutil
    m
-   pthread)
+   pthread
+   rt
+)
 

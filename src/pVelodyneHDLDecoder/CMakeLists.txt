@@ -22,5 +22,6 @@ TARGET_LINK_LIBRARIES(pVelodyneHDLDecoder
    boost_system
    mbutil
    m
-   pthread)
+   pthread
+)
 
