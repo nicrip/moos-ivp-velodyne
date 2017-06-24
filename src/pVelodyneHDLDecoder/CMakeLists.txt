@@ -18,6 +18,7 @@ ADD_EXECUTABLE(pVelodyneHDLDecoder ${SRC})
 TARGET_LINK_LIBRARIES(pVelodyneHDLDecoder
    ${MOOS_LIBRARIES}
    PacketDecoder
+   PacketBundleDecoder
    boost_system
    mbutil
    m

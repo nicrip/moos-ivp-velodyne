@@ -10,6 +10,7 @@
 
 #include "PacketDriver.h"
 #include "PacketDecoder.h"
+#include "PacketBundler.h"
 #include "PacketFileWriter.h"
 #include "MOOS/libMOOS/App/MOOSApp.h"
 
@@ -27,6 +28,7 @@ class VelodyneHDL : public CMOOSApp
    void RegisterVariables();
 
  private: // Configuration variables
+   bool                     m_bundle;
    bool                     m_decode;
    std::string              m_corrections_file;
    bool                     m_intensity;
@@ -41,6 +43,7 @@ class VelodyneHDL : public CMOOSApp
    std::vector<double>      m_frame;
    PacketDriver             m_driver;
    PacketDecoder            m_decoder;
+   PacketBundler            m_bundler;
    vtkPacketFileWriter      m_writer;
    std::string*             m_packet;
    unsigned int*            m_packet_length;
@@ -50,6 +53,8 @@ class VelodyneHDL : public CMOOSApp
    bool                     m_corrections_given;
    std::stringstream        m_variables;
    bool                     m_first_packet;
+   std::string              m_latest_bundle;
+   unsigned int             m_latest_bundle_length;
 };
 
 #endif

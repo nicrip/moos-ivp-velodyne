@@ -115,7 +115,15 @@ bool VelodyneHDL::Iterate()
     Notify("VELODYNE_FIRST_PACKET_TIME", MOOSTime());
     m_first_packet = false;
   }
-  Notify("VELODYNE_PACKET", (unsigned char*) m_packet->c_str(), *m_packet_length);
+
+  if (m_bundle) {
+    m_bundler.BundlePacket(m_packet, m_packet_length);
+    if (m_bundler.GetLatestBundle(&m_latest_bundle, &m_latest_bundle_length)) {
+      Notify("VELODYNE_PACKET_BUNDLE", (unsigned char*) m_latest_bundle.c_str(), m_latest_bundle_length);
+    }
+  } else {
+    Notify("VELODYNE_PACKET", (unsigned char*) m_packet->c_str(), *m_packet_length);
+  }
 
   if (m_decode) {
     m_decoder.DecodePacket(m_packet, m_packet_length);
@@ -166,6 +174,11 @@ bool VelodyneHDL::OnStartUp()
   m_timewarp = GetMOOSTimeWarp();
 
   SetIterateMode(REGULAR_ITERATE_AND_COMMS_DRIVEN_MAIL);  //must use aync (V10) comms, otherwise we can't publish packets quickly enough
+
+  if (!m_MissionReader.GetConfigurationParam("BUNDLE", m_bundle)) {
+    cerr << "BUNDLE not specified! Assuming True..." << endl;
+    m_bundle = true;
+  }
 
   if (!m_MissionReader.GetConfigurationParam("DECODE", m_decode)) {
     cerr << "DECODE not specified! Assuming True..." << endl;

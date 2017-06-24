@@ -20,6 +20,7 @@ TARGET_LINK_LIBRARIES(iVelodyneHDL
    ${MOOS_DEPEND_LIBRARIES}
    PacketDriver
    PacketDecoder
+   PacketBundler
    pcap
    boost_system
    mbutil
