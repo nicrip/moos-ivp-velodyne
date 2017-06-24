@@ -192,6 +192,7 @@ bool VelodyneHDLDecoder::OnStartUp()
 
   if (m_corrections_given) {
     m_decoder.SetCorrectionsFile(m_corrections_file);
+    m_bundle_decoder.SetCorrectionsFile(m_corrections_file);
   }
 
   if (!m_MissionReader.GetConfigurationParam("INTENSITY", m_intensity)) {
