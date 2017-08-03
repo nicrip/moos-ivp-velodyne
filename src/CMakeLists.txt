@@ -18,6 +18,7 @@ LINK_DIRECTORIES(${LOCAL_LIBRARY_DIRS})
 ADD_SUBDIRECTORY(iVelodyneHDL)
 ADD_SUBDIRECTORY(pVelodyneHDLDecoder)
 ADD_SUBDIRECTORY(iVelodyneHDLFileSender)
+ADD_SUBDIRECTORY(iRazor)
 
 ##############################################################################
 #                           END of CMakeLists.txt

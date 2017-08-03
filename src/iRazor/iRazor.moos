@@ -1,0 +1,15 @@
+//------------------------------------------------
+// iRazor config block
+
+ProcessConfig = iRazor
+{
+   // get and publish razor orientation data as quickly as possibe
+   AppTick   = 0
+
+   PORT = /dev/ttyACM0
+   BAUD = 115200
+   RAW = false            // true: publish raw accel//gryo/mag data
+   QUATERNION = flase     // true: publish quaternion data
+   EULER = true           // true: publish euler data
+}
+
