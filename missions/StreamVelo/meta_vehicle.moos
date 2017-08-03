@@ -7,6 +7,7 @@ Processconfig = ANTLER
 {
   MSBetweenLaunches = 100
   Run = iVelodyneHDL    @ NewConsole = false
+  Run = iRazor          @ NewConsole = false
 }
 
 // iVelodyneHDL config block
@@ -28,3 +29,17 @@ ProcessConfig = iVelodyneHDL
    WRITE_PATH = ./                      // write path for pcap file (must end with slash)
 }
 
+//------------------------------------------------
+// iRazor config block
+
+ProcessConfig = iRazor
+{
+   // get and publish razor orientation data as quickly as possibe
+   AppTick   = 0
+
+   PORT = /dev/ttyACM0
+   BAUD = 115200
+   RAW = true             // true: publish raw accel//gryo/mag data
+   QUATERNION = true      // true: publish quaternion data
+   EULER = true           // true: publish euler data
+}
